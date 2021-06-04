@@ -6,7 +6,10 @@ import dev.omaremara.editor.model.AutoCompleteSuggestion;
 import dev.omaremara.editor.view.View;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.IntFunction;
 import javafx.geometry.Bounds;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
@@ -15,6 +18,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.Separator;
 import javafx.scene.control.ToolBar;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.util.Pair;
@@ -43,7 +47,22 @@ public class EditorView implements View {
 
     CodeArea codeArea = Main.codeArea;
     VBox.setVgrow(codeArea, Priority.ALWAYS);
-    codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
+
+    /* Line Numbers And Error Markers */
+
+    IntFunction<Node> numberFactory = LineNumberFactory.get(codeArea);
+    IntFunction<Node> errorMarkerFactory = new ErrorMarkerFactory();
+    IntFunction<Node> graphicFactory = line -> {
+      Node lineNumber = numberFactory.apply(line);
+      Node errorMarker = errorMarkerFactory.apply(line);
+      HBox hBox = new HBox(lineNumber);
+      if (errorMarker != null) {
+        hBox.getChildren().add(errorMarker);
+      }
+      hBox.setAlignment(Pos.CENTER_LEFT);
+      return hBox;
+    };
+    codeArea.setParagraphGraphicFactory(graphicFactory);
 
     /* Comment Operation. */
 
