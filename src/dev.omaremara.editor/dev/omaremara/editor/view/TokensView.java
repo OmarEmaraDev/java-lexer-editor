@@ -8,7 +8,6 @@ import dev.omaremara.editor.model.TokenType;
 import dev.omaremara.editor.view.View;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;

@@ -2,7 +2,7 @@ classes/%.class : src/%.java
 	javac -p $(JAVA_MODULE_PATHS) -d $(JAVA_OUTPUT_DIRECTORY) \
 	--module-source-path $(SOURCE_MODULE_PATHS) $(JAVA_COMPILE_FLAGS) $<
 
-JAVA_MODULE_PATHS := /usr/lib/jvm/javafx-sdk-15/lib/
+JAVA_MODULE_PATHS := /usr/lib/jvm/javafx-sdk-15/lib/:libs/
 JAVA_OUTPUT_DIRECTORY := classes/
 SOURCE_MODULE_PATHS := src/
 JAVA_COMPILE_FLAGS := -Xlint
@@ -16,4 +16,4 @@ mods/editor.jar: $(CLASSES)
 
 .PHONY: run
 run: mods/editor.jar
-	java --add-modules javafx.controls -p $(JAVA_MODULE_PATHS) -jar $<
+	java --add-modules ALL-MODULE-PATH -p $(JAVA_MODULE_PATHS) -jar $<

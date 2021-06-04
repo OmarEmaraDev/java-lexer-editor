@@ -4,4 +4,6 @@ module dev.omaremara.editor {
   requires javafx.controls;
   requires javafx.graphics;
   exports dev.omaremara.editor to javafx.graphics;
+
+  requires richtextfx.fat;
 }

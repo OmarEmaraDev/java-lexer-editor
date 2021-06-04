@@ -13,8 +13,6 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 public class TokensController {
-  private String screenshotPath = "";
-
   public void browse() {
     Stage stage = Main.primaryStage;
     FileChooser fileChooser = new FileChooser();

@@ -9,9 +9,11 @@ import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import org.fxmisc.richtext.CodeArea;
 
 public class Main extends Application {
   public static Stage primaryStage;
+  public static CodeArea codeArea = new CodeArea();
   public static ObservableList<Token> tokens =
       FXCollections.observableArrayList();
 
