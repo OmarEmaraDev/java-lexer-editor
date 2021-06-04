@@ -38,6 +38,14 @@ public class EditorView implements View {
     VBox.setVgrow(codeArea, Priority.ALWAYS);
     codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
 
+    codeArea.setOnKeyPressed(event -> {
+      if (event.getCode() == KeyCode.SLASH && event.isControlDown()) {
+        IndexRange selectionRange = codeArea.getSelection();
+        codeArea.insertText(selectionRange.getStart(), "/# ");
+        codeArea.insertText(selectionRange.getEnd() + 3, " #/");
+      }
+    });
+
     VBox vBox = new VBox(toolBar, codeArea);
 
     return vBox;
