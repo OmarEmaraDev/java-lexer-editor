@@ -71,26 +71,23 @@ public class EditorView implements View {
     };
     codeArea.setParagraphGraphicFactory(graphicFactory);
 
-    /* Comment Operation. */
-
-    codeArea.setOnKeyPressed(event -> {
-      if (event.getCode() == KeyCode.SLASH && event.isControlDown()) {
-        IndexRange selectionRange = codeArea.getSelection();
-        codeArea.insertText(selectionRange.getStart(), "/# ");
-        codeArea.insertText(selectionRange.getEnd() + 3, " #/");
-      }
-    });
-
-    /* Auto Completeion. */
-
     ContextMenu autoCompleteMenu = new ContextMenu();
     autoCompleteMenu.setAutoHide(true);
 
     codeArea.setOnKeyPressed(event -> {
+      /* Comment Operation. */
+      if (event.getCode() == KeyCode.SLASH && event.isControlDown()) {
+        IndexRange selectionRange = codeArea.getSelection();
+        codeArea.insertText(selectionRange.getStart(), "/# ");
+        codeArea.insertText(selectionRange.getEnd() + 3, " #/");
+        return;
+      }
+
       if (!(event.getCode() == KeyCode.N && event.isControlDown())) {
         return;
       }
 
+      /* Auto Completeion. */
       Optional<Bounds> boundsOptional = codeArea.getCaretBounds();
       if (boundsOptional.isEmpty()) {
         return;
