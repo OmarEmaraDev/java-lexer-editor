@@ -159,6 +159,49 @@ public class Lexer {
     return new Token(lineNumber, number, TokenType.CONSTANT,
                      lexemeNumberInLine);
   }
+  
+  Token getUsingToken() {
+    int flag = 0;
+    String char = readChar();
+    String text = ""
+    while(flag != 5){
+      text =+ char;
+      flag ++;
+      char = readChar();
+    }
+      
+    if(text == "Using"){
+       Token token = 
+         new Token(lineNumber, text, TokenType.INCLUDE, lexemeNumberInLine);
+    }
+    else{
+      Token token = 
+         new Token(lineNumber, text, TokenType.I, lexemeNumberInLine);
+    }
+  
+    return token;
+  }
+  
+  Token getStringToken() {
+    String char = readChar();
+    if(char == "'"){
+      Token token =
+        new Token(lineNumber, "'", TokenType.STRING, lexemeNumberInLine);
+      String text = ""
+      while (readChar() != "'") {
+        text =+ readChar();
+      }
+    }
+    if(char == '"'){
+      Token token =
+        new Token(lineNumber, '"', TokenType.STRING, lexemeNumberInLine);
+      String text = ""
+      while (readChar() != '"') {
+        text + readChar();
+      }
+    }
+    return token;
+  }
 
   boolean isValidIdentifierChar(char c) {
     return Character.isAlphabetic(c) || Character.isDigit(c) || c == '_';
