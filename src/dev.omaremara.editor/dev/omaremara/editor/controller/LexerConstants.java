@@ -61,6 +61,8 @@ public class LexerConstants {
                                                TokenType.LOGIC_OPERATOR));
     result.put('|', new DoubleLexemeDefinition('|', '|', TokenType.UNKNOWN,
                                                TokenType.LOGIC_OPERATOR));
+    result.put('#', new DoubleLexemeDefinition('#', '/', TokenType.UNKNOWN,
+                                               TokenType.COMMENT));
     return Collections.unmodifiableMap(result);
   }
 

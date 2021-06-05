@@ -124,9 +124,6 @@ public class Lexer {
         incrementLineNumber();
       }
     }
-    readChar();
-    readChar();
-    token = new Token(lineNumber, "#/", TokenType.COMMENT, lexemeNumberInLine);
     return token;
   }
 
