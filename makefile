@@ -1,3 +1,5 @@
+.DEFAULT_GOAL := mods/editor.jar
+
 classes/%.class : src/%.java
 	javac -p $(JAVA_MODULE_PATHS) -d $(JAVA_OUTPUT_DIRECTORY) \
 	--module-source-path $(SOURCE_MODULE_PATHS) $(JAVA_COMPILE_FLAGS) $<
