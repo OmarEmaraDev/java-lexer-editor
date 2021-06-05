@@ -11,12 +11,14 @@ public class Token {
   private final Matchability matchability;
 
   public Token(int lineNumber, String lexeme, TokenType tokenType,
-               int wordNumber, Matchability matchability) {
+               int wordNumber) {
     this.lineNumber = lineNumber;
     this.lexeme = lexeme;
     this.tokenType = tokenType;
     this.wordNumber = wordNumber;
-    this.matchability = matchability;
+    this.matchability = tokenType == TokenType.UNKNOWN
+                            ? Matchability.NOT_MATCHED
+                            : Matchability.MATCHED;
   }
 
   public int getLineNumber() { return lineNumber; }

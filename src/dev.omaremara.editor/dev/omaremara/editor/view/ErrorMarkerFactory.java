@@ -14,23 +14,26 @@ public class ErrorMarkerFactory implements IntFunction<Node> {
   @Override
   public Node apply(int lineNumber) {
     Boolean lineHasError = false;
-    int firstErrorWordNumber = 0;
+    String firstErrorLexme = "";
     for (Token token : Main.tokens) {
-      if (token.getLineNumber() == lineNumber &&
+      if (token.getLineNumber() == lineNumber + 1 &&
           token.getMatchability() == Matchability.NOT_MATCHED) {
         lineHasError = true;
-        firstErrorWordNumber = token.getWordNumber();
+        firstErrorLexme = token.getLexeme();
         break;
       }
     }
 
     if (!lineHasError) {
-      return null;
+      /* Just for layout calculations. */
+      Circle circle = new Circle(5);
+      circle.setVisible(false);
+      return circle;
     }
 
     Circle circle = new Circle(5);
     circle.setFill(Color.RED);
-    String error = "Unmatched token at word " + firstErrorWordNumber + ".";
+    String error = "Unmatched lexme '" + firstErrorLexme + "'.";
     Tooltip tooltip = new Tooltip(error);
     Tooltip.install(circle, tooltip);
     return circle;
