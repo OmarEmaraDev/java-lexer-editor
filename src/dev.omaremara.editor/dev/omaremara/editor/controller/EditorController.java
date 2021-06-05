@@ -21,6 +21,7 @@ import javafx.util.Pair;
 public class EditorController {
   public void compile(String source) {
     Lexer lexer = new Lexer(source);
+    Main.tokens.clear();
     Main.tokens.addAll(lexer.tokenize());
   }
 

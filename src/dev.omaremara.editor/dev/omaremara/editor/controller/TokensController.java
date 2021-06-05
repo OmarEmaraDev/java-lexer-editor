@@ -29,6 +29,7 @@ public class TokensController {
     }
 
     try {
+      Main.tokens.clear();
       Lexer lexer = Lexer.fromFile(selectedFile);
       Main.tokens.addAll(lexer.tokenize());
     } catch (FileNotFoundException exception) {
