@@ -31,12 +31,19 @@ import org.fxmisc.richtext.model.StyleSpansBuilder;
 public class EditorView implements View {
   public Parent getRoot() {
     EditorController controller = new EditorController();
+    CodeArea codeArea = Main.codeArea;
 
     /* Tool Bar */
 
     Button compileButton = new Button("Compile");
     compileButton.setDefaultButton(true);
-    compileButton.setOnAction(e -> controller.compile());
+    compileButton.setOnAction(e -> {
+      controller.compile(codeArea.getText());
+      long numberOfParagraphs = codeArea.getText().lines().count();
+      for (int i = 0; i < numberOfParagraphs; i++) {
+        codeArea.recreateParagraphGraphic(i);
+      }
+    });
 
     Button tokensButton = new Button("Tokens");
     tokensButton.setOnAction(e -> controller.tokens());
@@ -45,8 +52,8 @@ public class EditorView implements View {
 
     /* Editor */
 
-    CodeArea codeArea = Main.codeArea;
     VBox.setVgrow(codeArea, Priority.ALWAYS);
+    codeArea.requestFocus();
 
     /* Line Numbers And Error Markers */
 

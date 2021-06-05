@@ -1,6 +1,7 @@
 package dev.omaremara.editor.controller;
 
 import dev.omaremara.editor.Main;
+import dev.omaremara.editor.controller.Lexer;
 import dev.omaremara.editor.model.AutoCompleteSuggestion;
 import dev.omaremara.editor.model.Matchability;
 import dev.omaremara.editor.model.Token;
@@ -18,16 +19,9 @@ import javafx.stage.Stage;
 import javafx.util.Pair;
 
 public class EditorController {
-  public void compile() {
-    /* Test Data */
-    List<Token> tokens = List.of(
-        new Token(1, "/-", TokenType.COMMENT, 1, Matchability.MATCHED),
-        new Token(2, "lre", TokenType.INTEGER_TYPE, 1, Matchability.MATCHED),
-        new Token(2, "@", TokenType.TOKEN_DELIMITER, 2, Matchability.MATCHED),
-        new Token(2, "Decrease", TokenType.IDENTIFIER, 3,
-                  Matchability.MATCHED));
-
-    Main.tokens.addAll(tokens);
+  public void compile(String source) {
+    Lexer lexer = new Lexer(source);
+    Main.tokens.addAll(lexer.tokenize());
   }
 
   public List<AutoCompleteSuggestion> autoComplete(int anchor, String source) {
